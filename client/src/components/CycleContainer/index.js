@@ -59,6 +59,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
 
     const PostRequest = async(e) => {
         setResultInfo('loading');
+        setReturnApi();
 
         let returnArray = [return1, return2, return3, return4];
 
