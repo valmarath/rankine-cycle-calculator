@@ -1,0 +1,13 @@
+	
+
+
+conversão de unidades (no back-end)
+
+retorno do servidor com msg de erro caso não seja possível efetuar o cálculo desejado
+
+Ajustar resultado indesejado para retornar no resultInfo
+
+
+
+
+
