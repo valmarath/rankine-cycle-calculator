@@ -8,7 +8,7 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 {label}
             </C.Label>
             {inputType === 'Pressure' &&
-                <C.Select defaultValue="Pa"  onChange={e => setInputUnit(e.target.value)}>
+                <C.Select defaultValue="kPa"  onChange={e => setInputUnit(e.target.value)}>
                     <option value="Pa">Pa</option>
                     <option value="kPa">kPa</option>
                     <option value="MPa">MPa</option>
@@ -25,7 +25,7 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 <C.Select defaultValue="kW"  onChange={e => setInputUnit(e.target.value)}>
                     <option value="W">W</option>
                     <option value="kW">kW</option>
-                    <option value="mW">mW</option>
+                    <option value="MW">MW</option>
                 </C.Select>
             }
         </C.Container>

@@ -78,7 +78,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
             return;
         }
 
-        let apiData = [cycleType, cycleProperties, fluid, return1, return2, return3, return4];
+        let apiData = [cycleType, cycleProperties, fluid, returnArray];
 
         console.log(apiData);
 

@@ -8,6 +8,7 @@ export const Container = styled.div`
     height: 5vh;
     width: 10vw;
     cursor: pointer;
+    margin-top: 10px;
 `;
 
 export const Label = styled.h4`
