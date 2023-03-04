@@ -37,7 +37,7 @@ export const CycleSelector = styled.div`
 export const CalcCycle = styled.div`
     display: flex;
     width: 100%;
-    height: 650px;
+    height: 750px;
 `;
 
 export const InputSide = styled.div`

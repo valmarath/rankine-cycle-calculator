@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 `;
@@ -14,4 +14,12 @@ export const Title = styled.h4`
 export const Results = styled.div`
 
 `;
+
+export const Unit = styled.select`
+    margin-left: 5px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #2962FF;
+`;
+
 

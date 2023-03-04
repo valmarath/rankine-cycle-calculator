@@ -25,6 +25,7 @@ export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4}
             setReturn1(createData)
         } else if (item.number === '2'){
             setReturn2(createData)
+            console.log(createData.value)
         } else if (item.number === '3') {
             setReturn3(createData)
         } else if (item.number === '4'){

@@ -21,7 +21,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Input 1 (Caldeira)',
         valor: 'Valor 1 (Caldeira)', 
         defaultInput: 'Pressure',
-        defaultUnit: 'Pa',
+        defaultUnit: 'MPa',
         number: '1',
     };
     const specific2 = {

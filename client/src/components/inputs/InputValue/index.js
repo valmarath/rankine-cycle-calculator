@@ -1,6 +1,6 @@
 import * as C from './styles';
 
-export const InputValue = ( {setInputValue, setInputType, label} ) => {
+export const InputValue = ( {setInputValue, label} ) => {
 
     return (
         <C.Container>
