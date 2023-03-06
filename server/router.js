@@ -129,6 +129,59 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.on('close', (code) => {
         console.log(`child process exited with code ${code}`);
       });
+    } else if (cycleProperties == 'RSI_2') {
+      childPython.stdout.on('data', (data) => {
+        let output = data.toString();
+        let outputArray = output.split(" ")
+        console.log(outputArray);
+        console.log(`stdout: ${outputArray[0]}`);
+        let h1 = parseFloat(outputArray[2]);
+        let specificVolume1 = parseFloat(1/outputArray[1]);
+        let wb = specificVolume1*(value1-value3);
+        let h2 = parseFloat(outputArray[2]) + parseFloat(wb);
+        let h3 = parseFloat(outputArray[5]);
+        let sl1 = parseFloat(outputArray[3]);
+        let s4 = parseFloat(outputArray[6]);
+        let x4 = (s4 - outputArray[3])/ (outputArray[8] - outputArray[3]);
+        let h4 = h1 + (x4*(outputArray[7] - outputArray[2]));
+        let vazaoMassica = value4 / ((h3 - h4) - (h2 - h1));
+        let qe = vazaoMassica * (h3 - h2);
+        let qs = vazaoMassica * (h4 - h1);
+        let wLiq = qe - qs;
+        let rendimento = (wLiq/qe) * 100;
+      
+        propListFinal = [
+          {property: 'h1', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h2', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h3', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h4', value: (h4/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'Título estado 4', value: x4.toFixed(4), unit: ''},
+          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
+          {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
+          {property: 'wLiq', value: (wLiq/1000).toFixed(4), unit: 'kW'},
+          {property: 'Rendimento', value: rendimento.toFixed(4), unit: '%'},
+          {property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
+          {property: 's4', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
+          {property: 'Volume Específico (estado 1)', value: specificVolume1.toFixed(6), unit: 'm3/kg'},
+        ]
+        if (propListFinal.length == 13 ) {
+          return res.status(200).json(propListFinal);
+        }  
+      });
+
+      childPython.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+        console.log('erro2');
+        if (error_count == 0) {
+          error_count = 1;
+          return res.status(400).json('error');
+        }
+      });
+    
+      childPython.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+      });
     }
   
 });

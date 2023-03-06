@@ -16,24 +16,26 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
     const [return2, setReturn2] = useState();
     const [return3, setReturn3] = useState();
     const [return4, setReturn4] = useState();
+    const [return5, setReturn5] = useState();
+    const [return6, setReturn6] = useState();
 
     const specific1 = {
-        input: 'Input 1 (Caldeira)',
-        valor: 'Valor 1 (Caldeira)', 
+        input: 'Pressão na caldeira',
+        valor: 'Valor', 
         defaultInput: 'Pressure',
         defaultUnit: 'MPa',
         number: '1',
     };
     const specific2 = {
-        input: 'Input 2 (Caldeira)',
-        valor: 'Valor 2 (Caldeira)', 
+        input: 'Temperatura na caldeira',
+        valor: 'Valor', 
         defaultInput: 'Temperature',
         defaultUnit: 'Celsius',
         number: '2'
     };
     const specific3 = {
-        input: 'Input 3 (Condensador)',
-        valor: 'Valor 3 (Condensador)', 
+        input: 'Temperatura no condensador',
+        valor: 'Valor', 
         defaultInput: 'Temperature',
         defaultUnit: 'Celsius',
         number: '3'
@@ -46,22 +48,73 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         number: '4',
     };
     const specific5 = {
-        input: 'Potência da Turbina 222',
+        input: 'Potência líquida',
         valor: 'Valor', 
         defaultInput: 'power',
         defaultUnit: 'kW',
         number: '4',
     };
+    const specific6 = {
+        input: 'Pressão no condensador',
+        valor: 'Valor', 
+        defaultInput: 'Pressure',
+        defaultUnit: 'MPa',
+        number: '3',
+    };
+    const specific7 = {
+        input: 'Potência da turbina (2º estágio)',
+        valor: 'Valor', 
+        defaultInput: 'power',
+        defaultUnit: 'kW',
+        number: '6',
+    };
+    const specific8 = {
+        input: 'Temperatura de reaquecimento',
+        valor: 'Valor', 
+        defaultInput: 'Temperature',
+        defaultUnit: 'Celsius',
+        number: '5'
+    };
+    const specific9 = {
+        input: 'Pressão na turbina (1º estágio)',
+        valor: 'Valor', 
+        defaultInput: 'Pressure',
+        defaultUnit: 'MPa',
+        number: '1',
+    };
+    const specific10 = {
+        input: 'Temperatura na turbina (1º estágio)',
+        valor: 'Valor', 
+        defaultInput: 'Temperature',
+        defaultUnit: 'Celsius',
+        number: '2'
+    };
+    const specific11 = {
+        input: 'Pressão do vapor expandido',
+        valor: 'Valor', 
+        defaultInput: 'Pressure',
+        defaultUnit: 'MPa',
+        number: '3',
+    };
 
     const RSI_1 = [specific1, specific2, specific3, specific4];
 
-    const RSI_2 = [specific1, specific2, specific3, specific5];
+    const RSI_2 = [specific1, specific2, specific6, specific5];
+
+    const RRI_1 = [specific9, specific10, specific11, specific8, specific3, specific7];
+
 
     const PostRequest = async(e) => {
         setResultInfo('loading');
         setReturnApi();
 
-        let returnArray = [return1, return2, return3, return4];
+        let returnArray = [];
+        if (cycleProperties === 'RSI_1' | cycleProperties === 'RSI_2') {
+            returnArray = [return1, return2, return3, return4];
+        } else if (cycleProperties === 'RRI_1') {
+            returnArray = [return1, return2, return3, return4, return5, return6];
+        }
+        console.log(returnArray);
 
         let validInput = false;
 
@@ -131,6 +184,19 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                         setReturn2 = {setReturn2}                    
                         setReturn3 = {setReturn3}
                         setReturn4 = {setReturn4}
+                    />
+            ))}
+            {(cycleProperties === 'RRI_1') && 
+                RRI_1.map((item, index) => (
+                    <InputRow
+                        key={index}
+                        item={item}
+                        setReturn1 = {setReturn1}
+                        setReturn2 = {setReturn2}                    
+                        setReturn3 = {setReturn3}
+                        setReturn4 = {setReturn4}
+                        setReturn5 = {setReturn5}
+                        setReturn6 = {setReturn6}
                     />
             ))}
             <PostButton onClick={PostRequest}/>

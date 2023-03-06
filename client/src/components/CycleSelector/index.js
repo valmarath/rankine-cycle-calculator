@@ -59,18 +59,18 @@ export const CycleSelector = ({setReturnApi, cycle, setCycle, setLayout}) => {
                 <C.Inputs>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RSI_1', index1: true})} cycleProperties={cycleProperties.index1} >
                         <p>Fluido</p>
-                        <p>Pressão na Caldeira</p>
-                        <p>Temperatura na Caldeira</p>
-                        <p>Temperatura no Condensador</p>
-                        <p>Potência da Turbina</p>
+                        <p>Pressão na caldeira</p>
+                        <p>Temperatura na caldeira</p>
+                        <p>Temperatura no condensador</p>
+                        <p>Potência da turbina</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index1} />
                     </C.InputItem>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RSI_2', index2: true})} cycleProperties={cycleProperties.index2} >
-                        <p>Fluido 2</p>
-                        <p>Pressão na Caldeira</p>
-                        <p>Temperatura nno Condensador</p>
-                        <p>Temperatura no Condensador</p>
-                        <p>Potência da Turbina</p>
+                        <p>Fluido</p>
+                        <p>Pressão na caldeira</p>
+                        <p>Temperatura na caldeira</p>
+                        <p>Pressão no condensador</p>
+                        <p>Potência líquida</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index2} />
                     </C.InputItem>
                 </C.Inputs>
@@ -92,9 +92,13 @@ export const CycleSelector = ({setReturnApi, cycle, setCycle, setLayout}) => {
             {(cycleType === 'RRI') &&
                 <C.Inputs>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RRI_1', index1: true})} cycleProperties={cycleProperties.index1} >
-                        <p>Temperatura na Caldeira</p>
-                        <p>Temperatura no Condensador</p>
-                        <p>Potência da Turbina</p>
+                        <p>Fluido</p>
+                        <p>Pressão da turbina (1º estágio)</p>
+                        <p>Temperaturada turbina (1º estágio) </p>
+                        <p>Pressão do vapor expandido</p>
+                        <p>Temperatura de reaquecimento</p>
+                        <p>Temperatura no condensador</p>
+                        <p>Potência da turbina (2º estágio)</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index1} />
                     </C.InputItem>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RRI_2', index2: true})} cycleProperties={cycleProperties.index2} >

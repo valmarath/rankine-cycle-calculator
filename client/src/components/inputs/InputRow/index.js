@@ -6,7 +6,7 @@ import { InputValue } from '../InputValue';
 import { InputUnit } from '../Unit';
 
 
-export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4} ) => {
+export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4, setReturn5, setReturn6} ) => {
 
     const [inputValue, setInputValue] = useState();
     const [isShown, setIsShown] = useState(false);
@@ -25,11 +25,14 @@ export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4}
             setReturn1(createData)
         } else if (item.number === '2'){
             setReturn2(createData)
-            console.log(createData.value)
         } else if (item.number === '3') {
             setReturn3(createData)
         } else if (item.number === '4'){
             setReturn4(createData)
+        } else if (item.number === '5'){
+            setReturn5(createData)
+        } else if (item.number === '6'){
+            setReturn6(createData)
         }
     }, [inputType, inputUnit, inputValue]);
 
