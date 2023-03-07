@@ -94,7 +94,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         valor: 'Valor', 
         defaultInput: 'Pressure',
         defaultUnit: 'MPa',
-        number: '3',
+        number: '4',
     };
 
     const RSI_1 = [specific1, specific2, specific3, specific4];
