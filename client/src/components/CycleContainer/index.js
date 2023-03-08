@@ -96,12 +96,44 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         defaultUnit: 'MPa',
         number: '4',
     };
+    const specific12 = {
+        input: 'Potência líquida',
+        valor: 'Valor', 
+        defaultInput: 'power',
+        defaultUnit: 'kW',
+        number: '6',
+    };
+    const specific13 = {
+        input: 'Pressão na turbina (1º estágio, saída)',
+        valor: 'Valor', 
+        defaultInput: 'Pressure',
+        defaultUnit: 'MPa',
+        number: '1',
+    };
+    const specific14 = {
+        input: 'Temperatura na turbina (1º estágio, saída)',
+        valor: 'Valor', 
+        defaultInput: 'Temperature',
+        defaultUnit: 'Celsius',
+        number: '2'
+    };
+    const specific15 = {
+        input: 'Eficiência isoentrópica (2º estágio)',
+        valor: 'Valor', 
+        defaultInput: 'Temperature',
+        defaultUnit: 'Celsius',
+        number: '2'
+    };
 
     const RSI_1 = [specific1, specific2, specific3, specific4];
 
     const RSI_2 = [specific1, specific2, specific6, specific5];
 
     const RRI_1 = [specific9, specific10, specific11, specific8, specific3, specific7];
+
+    const RRI_2 = [specific9, specific10, specific11, specific8, specific6, specific12];
+
+    const RRR_1 = [specific9, specific10, specific13, specific14, specific8, specific11, specific3, specific12];
 
 
     const PostRequest = async(e) => {
@@ -111,23 +143,23 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         let returnArray = [];
         if (cycleProperties === 'RSI_1' | cycleProperties === 'RSI_2') {
             returnArray = [return1, return2, return3, return4];
-        } else if (cycleProperties === 'RRI_1') {
+        } else if (cycleProperties === 'RRI_1' | cycleProperties === 'RRI_2') {
             returnArray = [return1, return2, return3, return4, return5, return6];
         }
         console.log(returnArray);
 
-        let validInput = false;
+        let validInput = true;
 
         returnArray.forEach(function(item, index){
-            if(item.value === undefined) {
-                return
-            } else {
-                validInput = true;
+            console.log(item.value)
+            if(item.value === undefined | item.value === null | item.value === NaN | item.value === ("")) {
+                validInput = false;
             }
         })
         
         if (validInput === false) {
             alert('Preencha todos os valores de entrada!')
+            setResultInfo('None');
             return;
         }
 
@@ -198,6 +230,32 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                         setReturn5 = {setReturn5}
                         setReturn6 = {setReturn6}
                     />
+            ))}            
+            {(cycleProperties === 'RRI_2') && 
+            RRI_2.map((item, index) => (
+                <InputRow
+                    key={index}
+                    item={item}
+                    setReturn1 = {setReturn1}
+                    setReturn2 = {setReturn2}                    
+                    setReturn3 = {setReturn3}
+                    setReturn4 = {setReturn4}
+                    setReturn5 = {setReturn5}
+                    setReturn6 = {setReturn6}
+                />
+            ))}            
+            {(cycleProperties === 'RRR_1') && 
+            RRR_1.map((item, index) => (
+                <InputRow
+                    key={index}
+                    item={item}
+                    setReturn1 = {setReturn1}
+                    setReturn2 = {setReturn2}                    
+                    setReturn3 = {setReturn3}
+                    setReturn4 = {setReturn4}
+                    setReturn5 = {setReturn5}
+                    setReturn6 = {setReturn6}
+                />
             ))}
             <PostButton onClick={PostRequest}/>
         </C.Container>

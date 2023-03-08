@@ -22,10 +22,6 @@ export const CycleSelector = ({setReturnApi, cycle, setCycle, setLayout}) => {
         }
     }, [cycleType])
 
-    useEffect(()=> {
-        console.log(cycleProperties)
-    }, [cycleProperties])
-
     const startButton = () => {
         let property = cycleProperties.property
         let item = {
@@ -102,9 +98,13 @@ export const CycleSelector = ({setReturnApi, cycle, setCycle, setLayout}) => {
                         <C.SelectedCircle cycleProperties={cycleProperties.index1} />
                     </C.InputItem>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RRI_2', index2: true})} cycleProperties={cycleProperties.index2} >
-                        <p>Fluido 2</p>
-                        <p>Pressão na Caldeira</p>
-                        <p>Potência da Turbina</p>
+                        <p>Fluido</p>
+                        <p>Pressão da turbina (1º estágio)</p>
+                        <p>Temperaturada turbina (1º estágio) </p>
+                        <p>Pressão do vapor expandido</p>
+                        <p>Temperatura de reaquecimento</p>
+                        <p>Pressão no condensador</p>
+                        <p>Potência líquida</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index2} />
                     </C.InputItem>
                 </C.Inputs>
@@ -113,6 +113,18 @@ export const CycleSelector = ({setReturnApi, cycle, setCycle, setLayout}) => {
                 <C.Inputs>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RRR_1', index1: true})} cycleProperties={cycleProperties.index1} >
                         <p>Fluido</p>
+                        <p>Pressão da turbina (1º estágio, entrada)</p>
+                        <p>Temperaturada turbina (1º estágio, entrada) </p>
+                        <p>Pressão da turbina (1º estágio, saída)</p>
+                        <p>Temperaturada turbina (1º estágio, saída) </p>
+                        <p>Temperatura de reaquecimento</p>
+                        <p>Pressão do vapor expandido</p>
+                        <p>Eficiência isoentrópica (2º estágio)</p>
+                        <p>Potência líquida</p>
+                        <p>Fluido de resfriamento</p>
+                        <p>Densidade do fluido de resfriamento</p>
+                        <p>Temperatura de entrada do fluido de resfriamento</p>
+                        <p>Vazão do fluído de resfriamento</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index1} />
                     </C.InputItem>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RRR_2', index2: true})} cycleProperties={cycleProperties.index2} >
