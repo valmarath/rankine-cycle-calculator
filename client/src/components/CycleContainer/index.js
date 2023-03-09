@@ -126,14 +126,34 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
     const specific15 = {
         input: 'Eficiência isoentrópica (2º estágio)',
         valor: 'Valor', 
-        defaultInput: 'Eficiência',
+        defaultInput: 'Efficiency',
         defaultUnit: '%',
-        number: '2'
+        number: '8'
     };
     const specific16 = {
-        input: 'Fluido de Resfriamento',
         defaultInput: 'fluid',
-        number: '2'
+        number: '9'
+    };
+    const specific17 = {
+        input: 'Densidade do fluido de resfriamento',
+        valor: 'Valor', 
+        defaultInput: 'Density',
+        defaultUnit: 'kg/m³',
+        number: '10'
+    };
+    const specific18 = {
+        input: 'Temperatura de entrada do fluido de resfriamento',
+        valor: 'Valor', 
+        defaultInput: 'Temperature',
+        defaultUnit: 'Celsius',
+        number: '11'
+    };
+    const specific19 = {
+        input: 'Vazão do fluido de resfriamento',
+        valor: 'Valor', 
+        defaultInput: 'flowRate',
+        defaultUnit: 'm³/min',
+        number: '12'
     };
 
     const RSI_1 = [specific1, specific2, specific3, specific4];
@@ -144,7 +164,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
 
     const RRI_2 = [specific9, specific10, specific11, specific8, specific6, specific12];
 
-    const RRR_1 = [specific9, specific10, specific13, specific14, specific8, specific11, specific15, specific12, specific16];
+    const RRR_1 = [specific9, specific10, specific13, specific14, specific8, specific11, specific15, specific12, specific16, specific17, specific18, specific19];
 
 
     const PostRequest = async(e) => {
