@@ -28,6 +28,11 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                     <option value="MW">MW</option>
                 </C.Select>
             }
+            {inputType === 'Eficiência' &&
+                <C.Select defaultValue="%"  onChange={e => setInputUnit(e.target.value)}>
+                    <option value="%">%</option>
+                </C.Select>
+            }
         </C.Container>
     )
 }

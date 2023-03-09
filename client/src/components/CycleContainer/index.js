@@ -18,6 +18,12 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
     const [return4, setReturn4] = useState();
     const [return5, setReturn5] = useState();
     const [return6, setReturn6] = useState();
+    const [return7, setReturn7] = useState();
+    const [return8, setReturn8] = useState();
+    const [return9, setReturn9] = useState();
+    const [return10, setReturn10] = useState();
+    const [return11, setReturn11] = useState();
+    const [return12, setReturn12] = useState();
 
     const specific1 = {
         input: 'Pressão na caldeira',
@@ -120,8 +126,13 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
     const specific15 = {
         input: 'Eficiência isoentrópica (2º estágio)',
         valor: 'Valor', 
-        defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultInput: 'Eficiência',
+        defaultUnit: '%',
+        number: '2'
+    };
+    const specific16 = {
+        input: 'Fluido de Resfriamento',
+        defaultInput: 'fluid',
         number: '2'
     };
 
@@ -133,7 +144,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
 
     const RRI_2 = [specific9, specific10, specific11, specific8, specific6, specific12];
 
-    const RRR_1 = [specific9, specific10, specific13, specific14, specific8, specific11, specific3, specific12];
+    const RRR_1 = [specific9, specific10, specific13, specific14, specific8, specific11, specific15, specific12, specific16];
 
 
     const PostRequest = async(e) => {
@@ -145,6 +156,8 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
             returnArray = [return1, return2, return3, return4];
         } else if (cycleProperties === 'RRI_1' | cycleProperties === 'RRI_2') {
             returnArray = [return1, return2, return3, return4, return5, return6];
+        } else if (cycleProperties === 'RRR_1' | cycleProperties === 'RRR_2') {
+            returnArray = [return1, return2, return3, return4, return5, return6, return7, return8, return9, return10, return11, return12];
         }
         console.log(returnArray);
 
@@ -195,7 +208,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                     <>Rankine com Reaquecimento (Real)</>
                 }
             </C.Title>
-            <FluidInput setFluid={setFluid} label="Fluido" />
+            <FluidInput setFluid={setFluid} label="Fluido" fluidType="main" />
             {(cycleProperties === 'RSI_1') && 
                 RSI_1.map((item, index) => (
                     <InputRow
@@ -255,6 +268,12 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                     setReturn4 = {setReturn4}
                     setReturn5 = {setReturn5}
                     setReturn6 = {setReturn6}
+                    setReturn7 = {setReturn7}
+                    setReturn8 = {setReturn8}                    
+                    setReturn9 = {setReturn9}
+                    setReturn10 = {setReturn10}
+                    setReturn11 = {setReturn11}
+                    setReturn12 = {setReturn12}
                 />
             ))}
             <PostButton onClick={PostRequest}/>
