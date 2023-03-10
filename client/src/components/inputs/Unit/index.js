@@ -34,13 +34,15 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 </C.Select>
             }
             {inputType === 'Density' &&
-                <C.Select defaultValue="kg/m³"  onChange={e => setInputUnit(e.target.value)}>
+                <C.Select defaultValue="kg/m³" onChange={e => setInputUnit(e.target.value)}>
                     <option value="kg/m³">kg/m³</option>
+                    <option value="g/cm³">g/cm³</option>
                 </C.Select>
             }
             {inputType === 'flowRate' &&
-                <C.Select defaultValue="m³/min"  onChange={e => setInputUnit(e.target.value)}>
+                <C.Select defaultValue="m³/min" onChange={e => setInputUnit(e.target.value)}>
                     <option value="m³/min">m³/min</option>
+                    <option value="L/min">L/min</option>
                 </C.Select>
             }
         </C.Container>

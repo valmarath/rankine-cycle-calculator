@@ -114,14 +114,14 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         valor: 'Valor', 
         defaultInput: 'Pressure',
         defaultUnit: 'MPa',
-        number: '1',
+        number: '3',
     };
     const specific14 = {
         input: 'Temperatura na turbina (1º estágio, saída)',
         valor: 'Valor', 
         defaultInput: 'Temperature',
         defaultUnit: 'Celsius',
-        number: '2'
+        number: '7'
     };
     const specific15 = {
         input: 'Eficiência isoentrópica (2º estágio)',
@@ -184,7 +184,6 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         let validInput = true;
 
         returnArray.forEach(function(item, index){
-            console.log(item.value)
             if(item.value === undefined | item.value === null | item.value === NaN | item.value === ("")) {
                 validInput = false;
             }

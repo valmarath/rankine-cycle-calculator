@@ -22,7 +22,7 @@ export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4,
         } else {
             setIsShown(false);
         }
-        //console.log(isShown, inputType, inputUnit, inputValue);
+        //console.log(inputValue);
         if(item.number === '1') {
             setReturn1(createData)
         } else if (item.number === '2'){
@@ -40,6 +40,9 @@ export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4,
         } else if (item.number === '8'){
             setReturn8(createData)
         } else if (item.number === '9'){
+            if (inputValue === undefined) {
+                setInputValue('Water');
+            }
             setReturn9(createData)
         } else if (item.number === '10'){
             setReturn10(createData)
