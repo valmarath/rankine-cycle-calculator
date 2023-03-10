@@ -416,7 +416,7 @@ Router.post('/RankineCycle', (req, res) => {
       let unit12 = parcel[3][11].unit;
 
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7]);
+      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7, value8]);
     
       let propListFinal = '';
       let error_count = 0;
@@ -444,45 +444,45 @@ Router.post('/RankineCycle', (req, res) => {
         let sv4s = parseFloat(outputArray[12]);
         let h4r = parseFloat(outputArray[16]);
         if (s3 > sv4s) {
-          h4 = h4s3s;
+          h4s = h4s3s;
         } else {
           let x4s = (s3 - sl4s)/(sv4s-sl4s);
           h4s=hl4s+(x4s*(hv4s-hl4s));
         }
         let h5 = parseFloat(outputArray[13]);
         let s5 = parseFloat(outputArray[14]);
-        let h6s = ''; 
-        if (sv1 > s5) {
-          let x6 = (s5 - sl1)/(sv1-sl1);
-          h6s=h1+(x6*(hv1-h1));
-        } else {
-          h6s=parseFloat(outputArray[15]);
-        }
-        let vazaoMassica = value6 / ((h3 - h4s)+(h5 - h6s)-wb);
-        let qe = vazaoMassica * (h3 - h2);
-        let qr = vazaoMassica * (h5 - h4s);
-        let qt = qe + qr;
-        let qs = vazaoMassica * (h6s - h1);
-        let wb1 = vazaoMassica * (h3 - h4s);
-        let rendimento = (value6/qt) * 100;
-      
+        let h6s = parseFloat(outputArray[15]); 
+        let h6r = parseFloat(outputArray[17]);
+        let t6r = parseFloat(outputArray[18])-273.15;
+        console.log(t6r)
+        let vazaoMassica = value6 / ((h3-h4r) + (h5 - h6r) - (h2-h1));
+        let ηt1 = (h3 - h4r)/(h3 - h4s);
+        let qt = vazaoMassica * ((h3-h2)+(h5-h4r));
+        let ηt = value6 / qt;
+        let qs = vazaoMassica * (h6r - h1);
+        ma = (value12/60)*value10;
+        ts = ((qs/1000)/(ma*4.18)) + (value11-273.15);
+        
         propListFinal = [
           {property: 'h1', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'h2', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'h3', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'h4s', value: (h4/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h4s', value: (h4s/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'h4r', value: (h4r/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'h5', value: (h5/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'h6s', value: (h6s/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h6r', value: (h6r/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
-          {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
-          {property: 'qr', value: (qr/1000).toFixed(4), unit: 'kW'},
+          {property: 'ηt1', value: (ηt1*100).toFixed(4), unit: '%'},
+          {property: 'ηt', value: (ηt*100).toFixed(4), unit: '%'},
           {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
           {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
-          {property: 'wb1', value: (wb1/1000).toFixed(4), unit: 'kW'},
-          {property: 'Rendimento', value: rendimento.toFixed(4), unit: '%'},
+          {property: 'ma', value: (ma).toFixed(4), unit: 'kg/s'},
+          {property: 'ts', value: (ts).toFixed(4), unit: 'Celsius'},
+          {property: 't6r', value: (t6r).toFixed(4), unit: 'Celsius'},
+
         ]
-        if (propListFinal.length == 14 ) {
+        if (propListFinal.length == 16 ) {
           return res.status(200).json(propListFinal);
         }  
       });

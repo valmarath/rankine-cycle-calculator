@@ -15,9 +15,12 @@ export const ResultItem = ( {index, item} ) => {
         }
         else if (unit === 'kJ/kg' | unit === 'kJ/kgK' | unit === 'kW') {
             setValue(item.value);
-        }
-        else if (unit === 'MW') {
+        } else if (unit === 'MW') {
             setValue(item.value/1000);
+        } else if (unit === 'Celsius') {
+            setValue(item.value);
+        } else if (unit === 'Kelvin') {
+            setValue((parseFloat(item.value) + 273.15).toFixed(4));
         }
       }, [item.value, unit]);
 
@@ -67,6 +70,12 @@ export const ResultItem = ( {index, item} ) => {
             {item.unit === 'm3/kg' &&
                 <C.Unit defaultValue={item.unit} onChange={e => setUnit(e.target.value)}>
                     <option value="m3/kg">m3/kg</option>
+                </C.Unit>
+            }
+            {item.unit === 'Celsius' &&
+                <C.Unit defaultValue={item.unit} onChange={e => setUnit(e.target.value)}>
+                    <option value="Celsius">Celsius</option>
+                    <option value="Kelvin">Kelvin</option>
                 </C.Unit>
             }
         </C.Container>
