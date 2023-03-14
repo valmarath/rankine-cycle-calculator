@@ -25,6 +25,12 @@ export const InputType = ( {label, defaultValue} ) => {
             setDefaultValueText('Vapor Superaquecido')
         }else if (defaultValue === 'power') {
             setDefaultValueText('Potência')
+        }else if (defaultValue === 'Efficiency') {
+            setDefaultValueText('Eficiência')
+        }else if (defaultValue === 'flowRate') {
+            setDefaultValueText('Vazão')
+        }else if (defaultValue === 'massFlowRate') {
+            setDefaultValueText('Vazão mássica')
         }}, [defaultValue]);
 
     return (

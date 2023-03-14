@@ -17,7 +17,7 @@ export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4,
     const inputType = item.defaultInput;
 
     useEffect(() => {
-        if (inputType === 'Temperature' || inputType === 'Pressure' || inputType === 'power' || inputType === 'Efficiency' || inputType === 'Density' || inputType === 'flowRate') {
+        if (inputType === 'Temperature' || inputType === 'Pressure' || inputType === 'power' || inputType === 'Efficiency' || inputType === 'Density' || inputType === 'flowRate' || inputType === 'massFlowRate') {
             setIsShown(true);
         } else {
             setIsShown(false);

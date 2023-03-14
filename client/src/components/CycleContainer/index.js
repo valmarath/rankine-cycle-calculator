@@ -149,11 +149,18 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         number: '11'
     };
     const specific19 = {
-        input: 'Vazão do fluido de resfriamento',
+        input: 'Vazão do fluído (de resfriamento)',
         valor: 'Valor', 
         defaultInput: 'flowRate',
         defaultUnit: 'm³/min',
         number: '12'
+    };
+    const specific20 = {
+        input: 'Vazão mássica do fluído',
+        valor: 'Valor', 
+        defaultInput: 'massFlowRate',
+        defaultUnit: 'kg/s',
+        number: '8'
     };
 
     const RSI_1 = [specific1, specific2, specific3, specific4];
@@ -166,6 +173,8 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
 
     const RRR_1 = [specific9, specific10, specific13, specific14, specific8, specific11, specific15, specific12, specific16, specific17, specific18, specific19];
 
+    const RRR_2 = [specific9, specific10, specific13, specific14, specific8, specific11, specific7, specific20];
+
 
     const PostRequest = async(e) => {
         setResultInfo('loading');
@@ -176,8 +185,10 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
             returnArray = [return1, return2, return3, return4];
         } else if (cycleProperties === 'RRI_1' | cycleProperties === 'RRI_2') {
             returnArray = [return1, return2, return3, return4, return5, return6];
-        } else if (cycleProperties === 'RRR_1' | cycleProperties === 'RRR_2') {
+        } else if (cycleProperties === 'RRR_1') {
             returnArray = [return1, return2, return3, return4, return5, return6, return7, return8, return9, return10, return11, return12];
+        } else if (cycleProperties === 'RRR_2') {
+            returnArray = [return1, return2, return3, return4, return5, return6, return7, return8];
         }
         console.log(returnArray);
 
@@ -293,6 +304,21 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                     setReturn10 = {setReturn10}
                     setReturn11 = {setReturn11}
                     setReturn12 = {setReturn12}
+                />
+            ))}            
+            {(cycleProperties === 'RRR_2') && 
+            RRR_2.map((item, index) => (
+                <InputRow
+                    key={index}
+                    item={item}
+                    setReturn1 = {setReturn1}
+                    setReturn2 = {setReturn2}                    
+                    setReturn3 = {setReturn3}
+                    setReturn4 = {setReturn4}
+                    setReturn5 = {setReturn5}
+                    setReturn6 = {setReturn6}
+                    setReturn7 = {setReturn7}
+                    setReturn8 = {setReturn8}                    
                 />
             ))}
             <PostButton onClick={PostRequest}/>

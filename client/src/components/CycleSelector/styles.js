@@ -28,6 +28,10 @@ export const InputItem = styled.div`
     border: 1px solid #000;
     cursor: pointer;
     margin: 10px;
+    p {
+        margin-block-start: 0.5em;
+        margin-block-end: 0.5em;
+    }
     ${props => props.cycleProperties === true && `
     background-color: pink;
 `}

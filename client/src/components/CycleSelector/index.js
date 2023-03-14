@@ -124,13 +124,19 @@ export const CycleSelector = ({setReturnApi, cycle, setCycle, setLayout}) => {
                         <p>Fluido de resfriamento</p>
                         <p>Densidade do fluido de resfriamento</p>
                         <p>Temperatura de entrada do fluido de resfriamento</p>
-                        <p>Vazão do fluído de resfriamento</p>
+                        <p>Vazão do fluído (de resfriamento)</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index1} />
                     </C.InputItem>
                     <C.InputItem onClick={e => setCycleProperties({property: 'RRR_2', index2: true})} cycleProperties={cycleProperties.index2} >
-                        <p>Fluido 2</p>
-                        <p>Temperatura no Condensador</p>
-                        <p>Potência da Turbina</p>
+                        <p>Fluido</p>
+                        <p>Pressão da turbina (1º estágio, entrada)</p>
+                        <p>Temperaturada turbina (1º estágio, entrada) </p>
+                        <p>Pressão da turbina (1º estágio, saída)</p>
+                        <p>Temperaturada turbina (1º estágio, saída) </p>
+                        <p>Temperatura de reaquecimento</p>
+                        <p>Pressão do vapor expandido</p>
+                        <p>Potência da turbina (2º estágio)</p>
+                        <p>Vazão mássica do fluído</p>
                         <C.SelectedCircle cycleProperties={cycleProperties.index2} />
                     </C.InputItem>
                 </C.Inputs>

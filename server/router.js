@@ -69,6 +69,15 @@ Router.post('/RankineCycle', (req, res) => {
             property.value = property.value * 0.001;
           break;
         };
+      } else if (property.input == 'massFlowRate') {
+        switch(property.unit) {
+          case 'kg/s':
+            property.value = property.value;
+          break;
+          case 'kg/min':
+            property.value = property.value/60;
+          break;
+        };
       }
     })
 
@@ -417,6 +426,105 @@ Router.post('/RankineCycle', (req, res) => {
 
       const { spawn } = require('child_process');
       const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7, value8]);
+    
+      let propListFinal = '';
+      let error_count = 0;
+
+      childPython.stdout.on('data', (data) => {
+        let output = data.toString();
+        let outputArray = output.split(" ")
+        console.log(outputArray);
+
+        let p1 = parseFloat(outputArray[0]);
+        let specificVolume1 = parseFloat(1/outputArray[1]);
+        let h1 = parseFloat(outputArray[2]);
+        let hv1 = parseFloat(outputArray[3]);
+        let sl1 = parseFloat(outputArray[4]);
+        let sv1 = parseFloat(outputArray[5]);
+        let wb = specificVolume1*(value1-p1);
+        let h2 = parseFloat(h1) + parseFloat(wb);
+        let h3 = parseFloat(outputArray[6]);
+        let s3 = parseFloat(outputArray[7]);
+        let h4s = '';
+        let hl4s = parseFloat(outputArray[8]);
+        let hv4s = parseFloat(outputArray[9]);
+        let h4s3s = parseFloat(outputArray[10]);
+        let sl4s = parseFloat(outputArray[11]);
+        let sv4s = parseFloat(outputArray[12]);
+        let h4r = parseFloat(outputArray[16]);
+        if (s3 > sv4s) {
+          h4s = h4s3s;
+        } else {
+          let x4s = (s3 - sl4s)/(sv4s-sl4s);
+          h4s=hl4s+(x4s*(hv4s-hl4s));
+        }
+        let h5 = parseFloat(outputArray[13]);
+        let s5 = parseFloat(outputArray[14]);
+        let h6s = parseFloat(outputArray[15]); 
+        let h6r = parseFloat(outputArray[17]);
+        let t6r = parseFloat(outputArray[18])-273.15;
+        console.log(t6r)
+        let vazaoMassica = value6 / ((h3-h4r) + (h5 - h6r) - (h2-h1));
+        let ηt1 = (h3 - h4r)/(h3 - h4s);
+        let qt = vazaoMassica * ((h3-h2)+(h5-h4r));
+        let ηt = value6 / qt;
+        let qs = vazaoMassica * (h6r - h1);
+        ma = (value12/60)*value10;
+        ts = ((qs/1000)/(ma*4.18)) + (value11-273.15);
+        
+        propListFinal = [
+          {property: 'h1', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h2', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h3', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h4s', value: (h4s/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h4r', value: (h4r/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h5', value: (h5/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h6s', value: (h6s/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'h6r', value: (h6r/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'ηt1', value: (ηt1*100).toFixed(4), unit: '%'},
+          {property: 'ηt', value: (ηt*100).toFixed(4), unit: '%'},
+          {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
+          {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
+          {property: 'ma', value: (ma).toFixed(4), unit: 'kg/s'},
+          {property: 'ts', value: (ts).toFixed(4), unit: 'Celsius'},
+          {property: 't6r', value: (t6r).toFixed(4), unit: 'Celsius'},
+
+        ]
+        if (propListFinal.length == 16 ) {
+          return res.status(200).json(propListFinal);
+        }  
+      });
+
+      childPython.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+        console.log('erro2');
+        if (error_count == 0) {
+          error_count = 1;
+          return res.status(400).json('error');
+        }
+      });
+    
+      childPython.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+      });
+
+    } else if (cycleProperties == 'RRR_2') {
+      let input5 = parcel[3][4].input;
+      let value5 = parcel[3][4].value;
+      let unit5 = parcel[3][4].unit;
+      let input6 = parcel[3][5].input;
+      let value6 = parcel[3][5].value;
+      let unit6 = parcel[3][5].unit;
+      let input7 = parcel[3][6].input;
+      let value7 = parcel[3][6].value;
+      let unit7 = parcel[3][6].unit;
+      let input8 = parcel[3][7].input;
+      let value8 = parcel[3][7].value;
+
+
+      const { spawn } = require('child_process');
+      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7]);
     
       let propListFinal = '';
       let error_count = 0;

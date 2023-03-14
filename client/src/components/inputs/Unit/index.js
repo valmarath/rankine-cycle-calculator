@@ -22,7 +22,7 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 </C.Select>
             }
             {inputType === 'power' &&
-                <C.Select defaultValue="kW"  onChange={e => setInputUnit(e.target.value)}>
+                <C.Select defaultValue="MW"  onChange={e => setInputUnit(e.target.value)}>
                     <option value="W">W</option>
                     <option value="kW">kW</option>
                     <option value="MW">MW</option>
@@ -43,6 +43,12 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 <C.Select defaultValue="m³/min" onChange={e => setInputUnit(e.target.value)}>
                     <option value="m³/min">m³/min</option>
                     <option value="L/min">L/min</option>
+                </C.Select>
+            }
+            {inputType === 'massFlowRate' &&
+                <C.Select defaultValue="kg/s" onChange={e => setInputUnit(e.target.value)}>
+                    <option value="kg/s">kg/s</option>
+                    <option value="kg/min">kg/min</option>
                 </C.Select>
             }
         </C.Container>
