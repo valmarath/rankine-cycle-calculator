@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as C from './App.styles';
 
-import headerImage from './svg/logo.png';
+import headerImage from './svg/logo2.png';
 
 import './App.css';
 import { CycleContainer } from './components/CycleContainer';
@@ -36,7 +36,7 @@ const App = () => {
         <C.HeaderImg>
           <C.ChangeCycle onClick={handleChangeCycle}>
           </C.ChangeCycle>
-          <img src={headerImage} alt="thermodynamics calculator logo" height={30} />
+          <img src={headerImage} alt="thermodynamics calculator logo" height={40} />
         </C.HeaderImg>
       </C.HeaderArea>
       {(layout === false) &&

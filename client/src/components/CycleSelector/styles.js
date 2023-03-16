@@ -5,6 +5,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #007AF1;
 `;
 
 export const Label = styled.h4`
@@ -32,8 +33,9 @@ export const InputItem = styled.div`
         margin-block-start: 0.5em;
         margin-block-end: 0.5em;
     }
+    background-color: #053378;
     ${props => props.cycleProperties === true && `
-    background-color: pink;
+    background-color: #F3C01C;
 `}
 `;
 
@@ -41,9 +43,9 @@ export const SelectedCircle = styled.div`
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: black;
+    background-color: #053378;
     ${props => props.cycleProperties === true && `
-    background-color: red;
+    background-color: #053378;
 `}
     margin: 10px 0;
 `;

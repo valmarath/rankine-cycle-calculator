@@ -17,9 +17,10 @@ export const Results = styled.div`
 
 export const Unit = styled.select`
     margin-left: 5px;
-    border: 1px solid #000;
+    border: 1px solid #FFF;
     border-radius: 4px;
     background-color: #2962FF;
+    color: white;
 `;
 
 

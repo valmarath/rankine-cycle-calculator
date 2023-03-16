@@ -6,6 +6,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
+    color: white;
 `;
 
 export const Title = styled.h2`

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100%; 
-    max-width: 900px;
+    max-width: 1250px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -15,18 +15,21 @@ export const Container = styled.div`
 
 export const HeaderArea = styled.header`
     width: 100%; 
-    background-color: #FFFD4D;
+    padding: 5px 0;
+    background-color: #053378;
 `;
 
 export const HeaderImg = styled.div`
     display: flex;
     justify-content: space-around;
+    align-items: center;
 `;
 
 export const ChangeCycle = styled.div`
     display: flex;
-    width: 40px;
-    background-color: black;
+    width: 30px;
+    height: 30px;
+    background-color: #F3C01C;
     cursor: pointer;
 `;
 
@@ -37,7 +40,7 @@ export const CycleSelector = styled.div`
 export const CalcCycle = styled.div`
     display: flex;
     width: 100%;
-    height: 750px;
+    height: auto;
 `;
 
 export const InputSide = styled.div`
