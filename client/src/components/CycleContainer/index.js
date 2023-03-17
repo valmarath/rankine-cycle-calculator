@@ -50,14 +50,14 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Potência da Turbina',
         valor: 'Valor', 
         defaultInput: 'power',
-        defaultUnit: 'kW',
+        defaultUnit: 'MW',
         number: '4',
     };
     const specific5 = {
         input: 'Potência líquida',
         valor: 'Valor', 
         defaultInput: 'power',
-        defaultUnit: 'kW',
+        defaultUnit: 'MW',
         number: '4',
     };
     const specific6 = {
@@ -71,7 +71,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Potência da turbina (2º estágio)',
         valor: 'Valor', 
         defaultInput: 'power',
-        defaultUnit: 'kW',
+        defaultUnit: 'MW',
         number: '6',
     };
     const specific8 = {
@@ -106,7 +106,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Potência líquida',
         valor: 'Valor', 
         defaultInput: 'power',
-        defaultUnit: 'kW',
+        defaultUnit: 'MW',
         number: '6',
     };
     const specific13 = {
