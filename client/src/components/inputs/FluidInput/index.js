@@ -8,7 +8,7 @@ export const FluidInput = ( {setFluid, label} ) => {
                 {label}
             </C.Label>
             <C.Select defaultValue="Water" onChange={e => setFluid(e.target.value)}>
-                <option value="Air">Air</option>
+{/*                 <option value="Air">Air</option>
                 <option value="1-Butene">1-Butene</option>
                 <option value="Acetone">Acetone</option>
                 <option  value="Ammonia">Ammonia</option>
@@ -112,9 +112,9 @@ export const FluidInput = ( {setFluid, label} ) => {
                 <option value="SES36">SES36</option>
                 <option value="SulfurDioxide">SulfurDioxide</option>
                 <option value="SulfurHexafluoride">SulfurHexafluoride</option>
-                <option value="Toluene">Toluene</option>
-                <option value="Water">Water</option>
-                <option value="Xenon">Xenon</option>
+                <option value="Toluene">Toluene</option> */}
+                <option value="Water">Água</option>
+{/*                 <option value="Xenon">Xenon</option>
                 <option value="cis-2-Butene">cis-2-Butene</option>
                 <option value="m-Xylene">m-Xylene</option>
                 <option value="n-Butane">n-Butane</option>
@@ -129,7 +129,7 @@ export const FluidInput = ( {setFluid, label} ) => {
                 <option value="n-Undecane">n-Undecane</option>
                 <option value="o-Xylene">o-Xylene</option>
                 <option value="p-Xylene">p-Xylene</option>
-                <option value="trans-2-Butene">trans-2-Butene</option>
+                <option value="trans-2-Butene">trans-2-Butene</option> */}
             </C.Select>
         </C.Container>
     )

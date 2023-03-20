@@ -98,7 +98,7 @@ Router.post('/RankineCycle', (req, res) => {
 
     if (cycleProperties == 'RSI_1') {
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3]);
+      const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3]);
     
       let propListFinal = '';
       let error_count = 0;
@@ -157,7 +157,7 @@ Router.post('/RankineCycle', (req, res) => {
       });
     } else if (cycleProperties == 'RSI_2') {
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3]);
+      const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3]);
     
       let propListFinal = '';
       let error_count = 0;
@@ -223,7 +223,7 @@ Router.post('/RankineCycle', (req, res) => {
       let unit6 = parcel[3][5].unit;
 
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5]);
+      const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5]);
     
       let propListFinal = '';
       let error_count = 0;
@@ -322,7 +322,7 @@ Router.post('/RankineCycle', (req, res) => {
       let unit6 = parcel[3][5].unit;
 
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5]);
+      const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5]);
     
       let propListFinal = '';
       let error_count = 0;
@@ -437,7 +437,7 @@ Router.post('/RankineCycle', (req, res) => {
       let unit12 = parcel[3][11].unit;
 
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7, value8]);
+      const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7, value8]);
     
       let propListFinal = '';
       let error_count = 0;
@@ -542,7 +542,7 @@ Router.post('/RankineCycle', (req, res) => {
 
 
       const { spawn } = require('child_process');
-      const childPython = spawn('python', ['venv/coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7]);
+      const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3, input4, value4, input5, value5, input7, value7]);
     
       let propListFinal = '';
       let error_count = 0;
