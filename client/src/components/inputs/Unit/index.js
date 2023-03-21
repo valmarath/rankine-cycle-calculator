@@ -40,7 +40,8 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 </C.Select>
             }
             {inputType === 'flowRate' &&
-                <C.Select defaultValue="m³/min" onChange={e => setInputUnit(e.target.value)}>
+                <C.Select defaultValue="m³/s" onChange={e => setInputUnit(e.target.value)}>
+                    <option value="m³/s">m³/s</option>
                     <option value="m³/min">m³/min</option>
                     <option value="L/min">L/min</option>
                 </C.Select>

@@ -152,7 +152,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Vazão do fluído (de resfriamento)',
         valor: 'Valor', 
         defaultInput: 'flowRate',
-        defaultUnit: 'm³/min',
+        defaultUnit: 'm³/s',
         number: '12'
     };
     const specific20 = {
@@ -163,7 +163,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         number: '8'
     };
 
-    const RSI_1 = [specific1, specific2, specific3, specific4];
+    const RSI_1 = [specific1, specific2, specific3, specific4, specific16, specific17, specific18, specific19];
 
     const RSI_2 = [specific1, specific2, specific6, specific5];
 
@@ -181,7 +181,9 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         setReturnApi();
 
         let returnArray = [];
-        if (cycleProperties === 'RSI_1' | cycleProperties === 'RSI_2') {
+        if (cycleProperties === 'RSI_1') {
+            returnArray = [return1, return2, return3, return4, return9, return10, return11, return12];
+        } else if (cycleProperties === 'RSI_2') {
             returnArray = [return1, return2, return3, return4];
         } else if (cycleProperties === 'RRI_1' | cycleProperties === 'RRI_2') {
             returnArray = [return1, return2, return3, return4, return5, return6];
@@ -248,6 +250,10 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                         setReturn2 = {setReturn2}                    
                         setReturn3 = {setReturn3}
                         setReturn4 = {setReturn4}
+                        setReturn9 = {setReturn9}
+                        setReturn10 = {setReturn10}
+                        setReturn11 = {setReturn11}
+                        setReturn12 = {setReturn12}
                     />
             ))}
             {(cycleProperties === 'RSI_2') && 

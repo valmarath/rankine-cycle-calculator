@@ -62,8 +62,11 @@ Router.post('/RankineCycle', (req, res) => {
         };
       } else if (property.input == 'flowRate') {
         switch(property.unit) {
-          case 'm³/min':
+          case 'm³/s':
             property.value = property.value;
+          break;
+          case 'm³/min':
+            property.value = property.value/60;
           break;
           case 'L/min':
             property.value = property.value * 0.001;
@@ -81,6 +84,7 @@ Router.post('/RankineCycle', (req, res) => {
       }
     })
 
+    // Standard inputs
     let input1 = parcel[3][0].input;
     let value1 = parcel[3][0].value;
     let unit1 = parcel[3][0].unit;
@@ -94,9 +98,22 @@ Router.post('/RankineCycle', (req, res) => {
     let value4 = parcel[3][3].value;
     let unit4 = parcel[3][3].unit;
   
-    // Using pyhton script to get properties
+    // Using pyhton script to get properties for each specific case
 
     if (cycleProperties == 'RSI_1') {
+      let input6 = parcel[3][5].input;
+      let value6 = parcel[3][5].value;
+      let unit6 = parcel[3][5].unit;
+      let input7 = parcel[3][6].input;
+      let value7 = parcel[3][6].value;
+      let unit7 = parcel[3][6].unit;
+      let input8 = parcel[3][7].input;
+      let value8 = parcel[3][7].value;
+      let unit8 = parcel[3][7].unit;
+
+
+      console.log(input6, input7, input8)
+
       const { spawn } = require('child_process');
       const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3]);
     
@@ -122,6 +139,8 @@ Router.post('/RankineCycle', (req, res) => {
         let qs = vazaoMassica * (h4 - h1);
         let wLiq = qe - qs;
         let rendimento = (wLiq/qe) * 100;
+        ma = (value8)*value6;
+        ts = ((qs/1000)/(ma*4.18)) + (value7-273.15);
       
         propListFinal = [
           {property: 'h1', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
@@ -137,8 +156,10 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'wLiq', value: (wLiq/1000).toFixed(4), unit: 'kW'},
           {property: 'Rendimento', value: rendimento.toFixed(4), unit: '%'},
           {property: 'Volume Específico (estado 1)', value: specificVolume1.toFixed(6), unit: 'm3/kg'},
+          {property: 'ma', value: (ma).toFixed(4), unit: 'kg/s'},
+          {property: 'ts', value: (ts).toFixed(4), unit: 'Celsius'},
         ]
-        if (propListFinal.length == 13 ) {
+        if (propListFinal.length == 15 ) {
           return res.status(200).json(propListFinal);
         }  
       });
@@ -481,7 +502,7 @@ Router.post('/RankineCycle', (req, res) => {
         let qt = vazaoMassica * ((h3-h2)+(h5-h4r));
         let ηt = value6 / qt;
         let qs = vazaoMassica * (h6r - h1);
-        ma = (value12/60)*value10;
+        ma = (value12)*value10;
         ts = ((qs/1000)/(ma*4.18)) + (value11-273.15);
         
         propListFinal = [
