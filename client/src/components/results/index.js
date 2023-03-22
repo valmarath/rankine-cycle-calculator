@@ -31,17 +31,21 @@ export const Result = ( {data, resultInfo} ) => {
             ))}
             {typeof data == "object" &&
                 <>
-                - Para calcular o mesmo ciclo com diferentes valores de entrada, basta modificar estes e clicar em calcular novamente.
-                <br/><br/>
-                - Para alterar o tipo de ciclo ou as entradas que serão fornecidas, clique em configurações e selecione o setup desejado.
+                    <p>
+                        - Para calcular o mesmo ciclo com diferentes valores de entrada, basta modificar estes e clicar em calcular novamente.
+                        <br/><br/>
+                        - Para alterar o tipo de ciclo ou as entradas que serão fornecidas, clique em configurações e selecione o setup desejado.
+                    </p>
                 </>
             // In case of error
             }
             {typeof data == "string" &&
                 <>
-                - Com base nos valores informados, não foi possível realizar os cálculos deste sistema.
-                <br/><br/>
-                - Revise os dados de entrada e verifique se os mesmos foram inseridos corretamente em seus devidos campos.
+                    <p>
+                        - Com base nos valores informados, não foi possível realizar os cálculos deste sistema.
+                        <br/><br/>
+                        - Revise os dados de entrada e verifique se os mesmos foram inseridos corretamente em seus devidos campos.
+                    </p>
                 </>
             }
 

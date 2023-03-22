@@ -7,6 +7,9 @@ export const Container = styled.div`
     align-items: center;
     height: 100%;
     color: white;
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
 `;
 
 export const Title = styled.h2`

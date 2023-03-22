@@ -16,7 +16,10 @@ export const Container = styled.div`
 export const HeaderArea = styled.header`
     width: 100%; 
     padding: 5px 0;
-    background-color: #053378;
+    background-color: #007AF1;
+    border-bottom: 5px solid #0060BF;
+    border-top-right-radius: 3vh;
+    border-top-left-radius: 3vh;
 `;
 
 export const HeaderImg = styled.div`

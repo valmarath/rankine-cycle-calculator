@@ -134,9 +134,9 @@ Router.post('/RankineCycle', (req, res) => {
         let s4 = parseFloat(outputArray[6]);
         let x4 = (s4 - outputArray[3])/ (outputArray[8] - outputArray[3]);
         let h4 = h1 + (x4*(outputArray[7] - outputArray[2]));
-        let vazaoMassica = value4 / (h3 - h4);
-        let qe = vazaoMassica * (h3 - h2);
-        let qs = vazaoMassica * (h4 - h1);
+        let massFlowRate = value4 / (h3 - h4);
+        let qe = massFlowRate * (h3 - h2);
+        let qs = massFlowRate * (h4 - h1);
         let wLiq = qe - qs;
         let rendimento = (wLiq/qe) * 100;
         ma = (value8)*value6;
@@ -150,7 +150,7 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 's4', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Título estado 4', value: x4.toFixed(4), unit: ''},
-          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão Mássica', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
           {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
           {property: 'wLiq', value: (wLiq/1000).toFixed(4), unit: 'kW'},
@@ -197,9 +197,9 @@ Router.post('/RankineCycle', (req, res) => {
         let s4 = parseFloat(outputArray[5]);
         let x4 = (s4 - outputArray[2])/ (outputArray[7] - outputArray[2]);
         let h4 = h1 + (x4*(outputArray[6] - outputArray[1]));
-        let vazaoMassica = value4 / ((h3 - h4) - (h2 - h1));
-        let qe = vazaoMassica * (h3 - h2);
-        let qs = vazaoMassica * (h4 - h1);
+        let massFlowRate = value4 / ((h3 - h4) - (h2 - h1));
+        let qe = massFlowRate * (h3 - h2);
+        let qs = massFlowRate * (h4 - h1);
         let wLiq = qe - qs;
         let rendimento = (wLiq/qe) * 100;
       
@@ -211,7 +211,7 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 's4', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Título estado 4', value: x4.toFixed(4), unit: ''},
-          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão Mássica', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
           {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
           {property: 'wLiq', value: (wLiq/1000).toFixed(4), unit: 'kW'},
@@ -285,13 +285,13 @@ Router.post('/RankineCycle', (req, res) => {
         } else {
           h6=parseFloat(outputArray[15]);
         }
-        let vazaoMassica = value6 / ((h5 - h6));
-        let qe = vazaoMassica * (h3 - h2);
-        let qr = vazaoMassica * (h5 - h4);
+        let massFlowRate = value6 / ((h5 - h6));
+        let qe = massFlowRate * (h3 - h2);
+        let qr = massFlowRate * (h5 - h4);
         let qt = qe + qr;
-        let qs = vazaoMassica * (h6 - h1);
-        let WB = wb*vazaoMassica;
-        let wb1 = vazaoMassica * (h3 - h4);
+        let qs = massFlowRate * (h6 - h1);
+        let WB = wb*massFlowRate;
+        let wb1 = massFlowRate * (h3 - h4);
         let wLiq = wb1 + value6 - WB;
         let ηt = (wLiq/qt) * 100;
       
@@ -308,7 +308,7 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'sl4', value: (sl4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'sv4', value: (sv4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 's5', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão Mássica', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
           {property: 'qr', value: (qr/1000).toFixed(4), unit: 'kW'},
           {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
@@ -384,12 +384,12 @@ Router.post('/RankineCycle', (req, res) => {
         } else {
           h6=parseFloat(outputArray[15]);
         }
-        let vazaoMassica = value6 / ((h3 - h4)+(h5 - h6)-wb);
-        let qe = vazaoMassica * (h3 - h2);
-        let qr = vazaoMassica * (h5 - h4);
+        let massFlowRate = value6 / ((h3 - h4)+(h5 - h6)-wb);
+        let qe = massFlowRate * (h3 - h2);
+        let qr = massFlowRate * (h5 - h4);
         let qt = qe + qr;
-        let qs = vazaoMassica * (h6 - h1);
-        let wb1 = vazaoMassica * (h3 - h4);
+        let qs = massFlowRate * (h6 - h1);
+        let wb1 = massFlowRate * (h3 - h4);
         let ηt = (value6/qt) * 100;
       
         propListFinal = [
@@ -405,7 +405,7 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'sl4', value: (sl4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'sv4', value: (sv4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 's5', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão Mássica', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
           {property: 'qr', value: (qr/1000).toFixed(4), unit: 'kW'},
           {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
@@ -497,11 +497,13 @@ Router.post('/RankineCycle', (req, res) => {
         let h6r = parseFloat(outputArray[17]);
         let t6r = parseFloat(outputArray[18])-273.15;
         console.log(t6r)
-        let vazaoMassica = value6 / ((h3-h4r) + (h5 - h6r) - (h2-h1));
+        let massFlowRate = value6 / ((h3-h4r) + (h5 - h6r) - (h2-h1));
         let ηt1 = (h3 - h4r)/(h3 - h4s);
-        let qt = vazaoMassica * ((h3-h2)+(h5-h4r));
+        let qs = massFlowRate * (h6r - h1);
+        let qe = massFlowRate * (h3-h2);
+        let qr = massFlowRate * (h5-h4r);
+        let qt = qe + qr;
         let ηt = value6 / qt;
-        let qs = vazaoMassica * (h6r - h1);
         ma = (value12)*value10;
         ts = ((qs/1000)/(ma*4.18)) + (value11-273.15);
         
@@ -520,17 +522,19 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'sl4', value: (sl4s/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'sv4', value: (sv4s/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 's5', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Vazão Mássica', value: vazaoMassica.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão Mássica', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'ηt1', value: (ηt1*100).toFixed(4), unit: '%'},
           {property: 'ηt', value: (ηt*100).toFixed(4), unit: '%'},
-          {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
+          {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
+          {property: 'qr', value: (qr/1000).toFixed(4), unit: 'kW'},
           {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
+          {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
           {property: 'ma', value: (ma).toFixed(4), unit: 'kg/s'},
           {property: 'ts', value: (ts).toFixed(4), unit: 'Celsius'},
           {property: 't6r', value: (t6r).toFixed(4), unit: 'Celsius'},
 
         ]
-        if (propListFinal.length == 22 ) {
+        if (propListFinal.length == 24 ) {
           return res.status(200).json(propListFinal);
         }  
       });
