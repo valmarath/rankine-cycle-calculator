@@ -6,20 +6,35 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #007AF1;
+    border-bottom-right-radius: 3vh;
+    border-bottom-left-radius: 3vh;
+    transition: ease-in-out 0.5s;
 `;
 
 export const Label = styled.h4`
     font-size: 2.5vh;
     color: #F0F8FE;
     text-align: center;
+    margin-bottom: 0.5em;
 `;
 
 export const Select = styled.select`
-
+    background-color: #0060BF;
+    font-size: 2.1vh;
+    text-align: center;
+    border: none;
+    color: #F0F8FE;
+    padding: 5px;
+    border-radius: 1vh;
+    cursor: pointer;
+    outline: none;
+    padding-left: 15px;
+    padding-right: 10px;
 `;
 
 export const Inputs = styled.div`
     display:flex;
+    transition: ease-in-out 0.5s;
 `;
 
 export const InputItem = styled.div`
@@ -32,6 +47,7 @@ export const InputItem = styled.div`
     border: 1px solid #0060BF;
     cursor: pointer;
     margin: 10px;
+    margin-top: 0px;
     p {
         margin-block-start: 0.5em;
         margin-block-end: 0.5em;
@@ -42,6 +58,7 @@ export const InputItem = styled.div`
 `}
     padding: 1vw;
     font-size: 2.1vh;
+    transition: ease-in-out 0.5s;
 `;
 
 export const SelectedCircle = styled.div`
@@ -84,7 +101,7 @@ export const Button = styled.button`
     align-items: center;
     text-align:center;
     height: auto;
-    // width: auto
+    width: auto;
     color: #F0F8FE;
     background-color: #0060BF;
     border: none;
@@ -92,8 +109,13 @@ export const Button = styled.button`
     margin-top: 10px;
     margin-bottom: 20px;
     font-size: 2.5vh;
-    padding: 7.5px;
+    padding: 8px;
     cursor: pointer;
+    :hover {
+        background-color: #F3C01C;
+        opacity: 0.9;
+    }
+    transition: ease-in-out 0.4s;
 `;
 
 

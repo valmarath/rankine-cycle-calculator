@@ -6,11 +6,15 @@ export const Container = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
-    padding: 50px 0;
+    padding: 25px 0;
 
     @media (max-width: 900px) {
         flex-direction: column;
     }
+    @media (max-width: 700px) {
+        padding: 0;
+    }
+    transition: ease-in-out 0.5s;
 `;
 
 export const HeaderArea = styled.header`
@@ -30,9 +34,10 @@ export const HeaderImg = styled.div`
 
 export const ChangeCycle = styled.div`
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30px;
     height: 30px;
-    background-color: #F3C01C;
     cursor: pointer;
 `;
 

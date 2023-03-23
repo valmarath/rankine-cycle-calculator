@@ -1,8 +1,10 @@
 body {
   background-color: #0060BF;
+  transition: ease-in-out 0.5s;
 }
 .App {
   text-align: center;
+  transition: ease-in-out 0.5s;
 }
 
 .App-logo {
@@ -37,5 +39,11 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  body {
+    background-color: #007AF1;
   }
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as C from './App.styles';
 
-import headerImage from './svg/logo2.png';
+import headerImage from './svg/logo3.png';
+import settingsImage from './svg/settings30.png';
 
 import './App.css';
 import { CycleContainer } from './components/CycleContainer';
@@ -35,6 +36,7 @@ const App = () => {
       <C.HeaderArea>
         <C.HeaderImg>
           <C.ChangeCycle onClick={handleChangeCycle}>
+          <img src={settingsImage} alt="thermodynamics calculator logo" height={40} />
           </C.ChangeCycle>
           <img src={headerImage} alt="thermodynamics calculator logo" height={40} />
         </C.HeaderImg>
