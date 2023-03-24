@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.h4`
-    font-size: 2.5vh;
+    font-size: 1.5em;
     color: #F0F8FE;
     text-align: center;
     margin-bottom: 0.5em;
@@ -20,7 +20,7 @@ export const Label = styled.h4`
 
 export const Select = styled.select`
     background-color: #0060BF;
-    font-size: 2.1vh;
+    font-size: 1.3em;
     text-align: center;
     border: none;
     color: #F0F8FE;
@@ -28,8 +28,6 @@ export const Select = styled.select`
     border-radius: 1vh;
     cursor: pointer;
     outline: none;
-    padding-left: 15px;
-    padding-right: 10px;
 `;
 
 export const Inputs = styled.div`
@@ -57,7 +55,7 @@ export const InputItem = styled.div`
     background-color: #F3C01C;
 `}
     padding: 1vw;
-    font-size: 2.1vh;
+    font-size: 1.3em;
     transition: ease-in-out 0.5s;
 `;
 
@@ -108,7 +106,7 @@ export const Button = styled.button`
     border-radius: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
-    font-size: 2.5vh;
+    font-size: 1.5em;
     padding: 8px;
     cursor: pointer;
     :hover {
@@ -116,6 +114,7 @@ export const Button = styled.button`
         opacity: 0.9;
     }
     transition: ease-in-out 0.4s;
+    margin-left: 10px;
 `;
 
 

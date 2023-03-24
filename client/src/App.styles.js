@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 100%; 
-    max-width: 1250px;
+    width: auto; 
+    max-width: 1150px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -39,6 +39,9 @@ export const ChangeCycle = styled.div`
     width: 30px;
     height: 30px;
     cursor: pointer;
+    :hover {
+        opacity: 0.7;
+    }
 `;
 
 export const CycleSelector = styled.div`
@@ -49,14 +52,18 @@ export const CalcCycle = styled.div`
     display: flex;
     width: 100%;
     height: auto;
+    border-bottom-left-radius: 3vh;
 `;
 
 export const InputSide = styled.div`
     flex: 1;
-    background-color: #F5F5F7;
+    background-color: #007AF1;
+    border-bottom-left-radius: 3vh;
 `;
 
 export const ResultSide = styled.div`
     flex: 1;
-    background-color: #2962FF;
+    background-color: #007AF1;
+    border-left: 3px solid #0060BF;
+    border-bottom-right-radius: 3vh;
 `;
