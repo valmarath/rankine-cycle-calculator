@@ -13,7 +13,10 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-
+    @media (max-width:600px) {
+        padding-top: 0.5em;
+        border-top: 2px solid #007AF1;    
+    }
 `;
 
 export const Results = styled.div`
