@@ -7,6 +7,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex: 1;
 `;
 
 export const Type = styled.div`
@@ -28,6 +29,10 @@ export const Type = styled.div`
 
 export const Label = styled.h4`
     color: #F0F8FE;
-    margin: 0.5em 0;;
+    margin: 0.5em 0;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 

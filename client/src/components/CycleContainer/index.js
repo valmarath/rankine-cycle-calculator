@@ -240,7 +240,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
                     <>Rankine com Reaquecimento (Real)</>
                 }
             </C.Title>
-            <FluidInput setFluid={setFluid} label="Fluido" fluidType="main" />
+            <FluidInput setFluid={setFluid} label="Fluido" fluidType="main" first={true} />
             {(cycleProperties === 'RSI_1') && 
                 RSI_1.map((item, index) => (
                     <InputRow

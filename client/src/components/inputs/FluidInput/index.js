@@ -1,9 +1,9 @@
 import * as C from './styles';
 
-export const FluidInput = ( {setFluid, label} ) => {
+export const FluidInput = ( {setFluid, label, first} ) => {
 
     return (
-        <C.Container>
+        <C.Container first={first}> 
             <C.Label>
                 {label}
             </C.Label>

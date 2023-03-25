@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
-
+    color: #F0F8FE;
 `;
 
 export const InputRow = styled.div`

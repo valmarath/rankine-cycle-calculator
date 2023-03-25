@@ -63,7 +63,7 @@ export const InputRow = ( {item, setReturn1, setReturn2, setReturn3, setReturn4,
     return (
         <C.Container>
             {item.defaultInput === 'fluid' &&
-                <FluidInput setFluid={setInputValue} label="Fluido" fluidType="cooling" />
+                <FluidInput setFluid={setInputValue} label="Fluido" fluidType="cooling" first={false}/>
             }
             {item.defaultInput !== 'fluid' &&
             <>

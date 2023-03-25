@@ -53,6 +53,9 @@ export const CalcCycle = styled.div`
     width: 100%;
     height: auto;
     border-bottom-left-radius: 3vh;
+    @media (max-width:600px) {
+        flex-direction: column;
+    }
 `;
 
 export const InputSide = styled.div`

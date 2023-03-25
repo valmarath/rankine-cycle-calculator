@@ -7,11 +7,16 @@ export const Container = styled.div`
     margin-left: 15px;
     justify-content: center;
     align-items: center;
+    flex: 1;
 `;
 
 export const Label = styled.h4`
     color: #F0F8FE;
     margin: 0.5em 0;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const Select = styled.select`
@@ -26,7 +31,8 @@ export const Select = styled.select`
     padding: 5px;
     border-radius: 1vh;
     width: fit-content;
-    padding: .2em 1.5em;
+    padding: .2em 0;
+    width: 6em;
     color: #F0F8FE;
     height: 1.7em;
     cursor: pointer;
