@@ -6,8 +6,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #007AF1;
-    border-right: 3px solid #0060BF;
     border-bottom-left-radius: 3vh;
+
 `;
 
 export const Title = styled.h2`

@@ -7,7 +7,7 @@ export const InputValue = ( {setInputValue, label} ) => {
             <C.Label>
                 {label}
             </C.Label>
-            <C.Input placeholder='6000' type='number' onChange={e => setInputValue(e.target.value)}>
+            <C.Input placeholder='545' type='number' onChange={e => setInputValue(e.target.value)}>
 
             </C.Input>
         </C.Container>

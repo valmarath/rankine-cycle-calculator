@@ -6,10 +6,14 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: white;
-    width: 70%;
-    margin: 0 auto;
+    color: #F0F8FE;
+    width: 100%;
+    margin: 0 0;
     text-align: center;
+    p {
+        padding: 1em;
+        font-size: 1.05em;
+    }
 `;
 
 export const Title = styled.h2`
@@ -20,7 +24,6 @@ export const Title = styled.h2`
 `;
 
 export const Results = styled.div`
-
 `;
 
 export const Loading = styled.div`

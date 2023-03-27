@@ -6,8 +6,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #007AF1;
-    border-bottom-right-radius: 3vh;
-    border-bottom-left-radius: 3vh;
+    border-bottom-right-radius: 2em;
+    border-bottom-left-radius: 2em;
     transition: ease-in-out 0.5s;
 `;
 

@@ -4,10 +4,10 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     visibility: ${props => props.visible ? 'visible' : 'hidden'};
-    margin-left: 15px;
     justify-content: center;
     align-items: center;
     flex: 1;
+    padding-right: 0.3em;
 `;
 
 export const Label = styled.h4`
@@ -28,8 +28,7 @@ export const Select = styled.select`
     text-align: center;
     border: none;
     color: #F0F8FE;
-    padding: 5px;
-    border-radius: 1vh;
+    border-radius: 0.5em;
     width: fit-content;
     padding: .2em 0;
     width: 6em;

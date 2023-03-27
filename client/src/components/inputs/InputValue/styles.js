@@ -28,8 +28,8 @@ export const Input = styled.input`
     border: none;
     color: #F0F8FE;
     padding: 5px;
-    border-radius: 1vh;
-    width: fit-content;
+    border-radius: 0.5em;
+    width: 80%;
     padding: .2em 0;
     color: #F0F8FE;
     height: 1.3em;
@@ -38,5 +38,10 @@ export const Input = styled.input`
     color: #F0F8FE;
     ::placeholder {
         color: #F0F8FE;
+        opacity: 0.5;
+    }
+    ::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      display: none;
     }
 `;

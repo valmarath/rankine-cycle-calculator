@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 15px;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex: 1;
+    padding-left: 0.3em;
 `;
 
 export const Type = styled.div`
@@ -20,7 +20,7 @@ export const Type = styled.div`
     border: none;
     color: #F0F8FE;
     padding: 5px;
-    border-radius: 1vh;
+    border-radius: 0.5em;
     width: fit-content;
     padding: .2em 1.5em;
     color: #F0F8FE;
