@@ -8,7 +8,6 @@ export const Container = styled.div`
     background-color: #007AF1;
     border-bottom-right-radius: 2em;
     border-bottom-left-radius: 2em;
-    transition: ease-in-out 0.5s;
 `;
 
 export const Label = styled.h4`

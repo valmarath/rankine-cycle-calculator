@@ -7,7 +7,6 @@ export const Container = styled.div`
     align-items: center;
     background-color: #007AF1;
     border-bottom-left-radius: 3vh;
-
 `;
 
 export const Title = styled.h2`

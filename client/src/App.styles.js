@@ -16,7 +16,6 @@ export const Container = styled.div`
     @media (max-width: 700px) {
         padding: 0;
     }
-    transition: ease-in-out 0.5s;
 `;
 
 export const HeaderArea = styled.header`

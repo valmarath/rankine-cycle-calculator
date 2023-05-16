@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as C from './App.styles';
 
 import headerImage from './svg/logo3.png';
@@ -15,15 +15,15 @@ const App = () => {
   const [cycle, setCycle] = useState('first');
   const [layout, setLayout] = useState(false);
   const [resultInfo, setResultInfo] = useState('None');
+  const resultFocusRef = useRef(null);
 
 
   useEffect(() => {
-    console.log(returnApi);
+    console.log(typeof returnApi);
+    if (typeof returnApi === 'object') {
+      resultFocusRef.current.scrollIntoView({ behavior: 'smooth'});
+    }
   }, [returnApi]);
-
-  useEffect(() => {
-    console.log(cycle)
-  }, [cycle]);
 
   const handleChangeCycle = () => {
     if(cycle !== 'first'){
@@ -49,8 +49,8 @@ const App = () => {
         <C.InputSide>
           <CycleContainer setReturnApi={setReturnApi} cycleType={cycle.cycleType} cycleProperties={cycle.property} setResultInfo={setResultInfo} />
         </C.InputSide>
-        <C.ResultSide>
-          <Result data={returnApi} resultInfo={resultInfo}/>
+        <C.ResultSide ref={resultFocusRef}>
+          <Result data={returnApi} resultInfo={resultInfo} />
         </C.ResultSide>
       </C.CalcCycle>
       }

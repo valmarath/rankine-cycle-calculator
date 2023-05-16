@@ -17,11 +17,11 @@ export const Result = ( {data, resultInfo} ) => {
                 </p>
             </C.Loading>}
             {(resultInfo === 'loading') &&
-            <C.Loading>
-                <p>
-                    Loading...
-                </p>
-            </C.Loading>}
+                <C.Loading>
+                    <p>
+                        Loading...
+                    </p>
+                </C.Loading>}
             {typeof data == "object" &&
             data.map((item, index) => (
                 <ResultItem

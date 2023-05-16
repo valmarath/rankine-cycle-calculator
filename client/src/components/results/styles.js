@@ -23,9 +23,6 @@ export const Title = styled.h2`
     }
 `;
 
-export const Results = styled.div`
-`;
-
 export const Loading = styled.div`
     height: 100%;
     display: flex;
