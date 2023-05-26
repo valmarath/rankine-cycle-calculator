@@ -16,9 +16,9 @@ export const InputUnit = ( {setInputUnit, label, inputType, visible} ) => {
                 </C.Select>
             }
             {inputType === 'Temperature' &&
-                <C.Select defaultValue="Celsius"  onChange={e => setInputUnit(e.target.value)}>
-                    <option value="Celsius">Celsius</option>
-                    <option value="Kelvin">Kelvin</option>
+                <C.Select defaultValue="°C"  onChange={e => setInputUnit(e.target.value)}>
+                    <option value="°C">°C</option>
+                    <option value="K">K</option>
                 </C.Select>
             }
             {inputType === 'power' &&

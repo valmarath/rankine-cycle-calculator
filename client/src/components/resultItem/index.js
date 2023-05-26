@@ -13,14 +13,16 @@ export const ResultItem = ( {index, item} ) => {
         if (unit === 'J/kg' | unit === 'J/kgK' | unit === 'W') {
             setValue(item.value*1000);
         }
-        else if (unit === 'kJ/kg' | unit === 'kJ/kgK' | unit === 'kW') {
+        else if (unit === 'kJ/kg' | unit === 'kJ/kgK' | unit === 'kW' | unit === 'kg/s') {
             setValue(item.value);
         } else if (unit === 'MW') {
             setValue(item.value/1000);
-        } else if (unit === 'Celsius') {
+        } else if (unit === '°C') {
             setValue(item.value);
-        } else if (unit === 'Kelvin') {
+        } else if (unit === 'K') {
             setValue((parseFloat(item.value) + 273.15).toFixed(4));
+        } else if (unit === 'kg/min') {
+            setValue((parseFloat(item.value)*60).toFixed(4));
         }
       }, [item.value, unit]);
 
@@ -60,6 +62,7 @@ export const ResultItem = ( {index, item} ) => {
             {item.unit === 'kg/s' &&
                 <C.Unit defaultValue={item.unit} onChange={e => setUnit(e.target.value)}>
                     <option value="kg/s">kg/s</option>
+                    <option value="kg/min">kg/min</option>
                 </C.Unit>
             }
             {item.unit === '%' &&
@@ -72,10 +75,10 @@ export const ResultItem = ( {index, item} ) => {
                     <option value="m3/kg">m3/kg</option>
                 </C.Unit>
             }
-            {item.unit === 'Celsius' &&
+            {item.unit === '°C' &&
                 <C.Unit defaultValue={item.unit} onChange={e => setUnit(e.target.value)}>
-                    <option value="Celsius">Celsius</option>
-                    <option value="Kelvin">Kelvin</option>
+                    <option value="°C">°C</option>
+                    <option value="K">K</option>
                 </C.Unit>
             }
         </C.Container>

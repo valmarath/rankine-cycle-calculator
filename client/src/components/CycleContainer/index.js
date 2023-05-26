@@ -36,14 +36,14 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Temperatura na caldeira',
         valor: 'Valor', 
         defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultUnit: '°C',
         number: '2'
     };
     const specific3 = {
         input: 'Temperatura no condensador',
         valor: 'Valor', 
         defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultUnit: '°C',
         number: '3'
     };
     const specific4 = {
@@ -78,7 +78,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Temperatura de reaquecimento',
         valor: 'Valor', 
         defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultUnit: '°C',
         number: '5'
     };
     const specific9 = {
@@ -92,7 +92,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Temperatura na turbina (1º estágio)',
         valor: 'Valor', 
         defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultUnit: '°C',
         number: '2'
     };
     const specific11 = {
@@ -110,17 +110,17 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         number: '6',
     };
     const specific13 = {
-        input: 'Pressão na turbina (1º estágio, saída)',
+        input: 'Pressão na turbina (2º estágio, saída)',
         valor: 'Valor', 
         defaultInput: 'Pressure',
         defaultUnit: 'MPa',
         number: '3',
     };
     const specific14 = {
-        input: 'Temperatura na turbina (1º estágio, saída)',
+        input: 'Temperatura na turbina (2º estágio, saída)',
         valor: 'Valor', 
         defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultUnit: '°C',
         number: '7'
     };
     const specific15 = {
@@ -145,7 +145,7 @@ export const CycleContainer = ({setReturnApi, cycleType, cycleProperties, setRes
         input: 'Temperatura de entrada do fluido de resfriamento',
         valor: 'Valor', 
         defaultInput: 'Temperature',
-        defaultUnit: 'Celsius',
+        defaultUnit: '°C',
         number: '11'
     };
     const specific19 = {

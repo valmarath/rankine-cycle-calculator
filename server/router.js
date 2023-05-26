@@ -3,7 +3,6 @@ const Router= express.Router();
 
 Router.post('/RankineCycle', (req, res) => {
     var {parcel} = req.body
-    //console.log(parcel)
     if(!parcel){
       return res.status(400).send({status:'failed'})
     }
@@ -11,7 +10,7 @@ Router.post('/RankineCycle', (req, res) => {
     // Setting Variables received from the front-end
     let cycleProperties = parcel[1];
     let fluid = parcel[2];
-
+    //console.log(parcel)
     // Making unit conversions
     parcel[3].forEach(function(property) {
       if(property.input == 'Pressure') {
@@ -31,10 +30,10 @@ Router.post('/RankineCycle', (req, res) => {
         };
       } else if (property.input == 'Temperature') {
         switch(property.unit) {
-          case 'Celsius':
+          case '°C':
             property.value = parseInt(property.value) + 273.15;
           break;
-          case 'Kelvin':
+          case 'K':
             property.value = property.value;
           break;
         };
@@ -77,12 +76,12 @@ Router.post('/RankineCycle', (req, res) => {
             property.value = property.value;
           break;
           case 'kg/min':
-            property.value = property.value/60;
+            property.value = (property.value)/60;
           break;
         };
       }
     })
-
+    //console.log(parcel)
     // Standard inputs
     let input1 = parcel[3][0].input;
     let value1 = parcel[3][0].value;
@@ -100,9 +99,6 @@ Router.post('/RankineCycle', (req, res) => {
       let value7 = parcel[3][6].value;
       let value8 = parcel[3][7].value;
 
-
-      //console.log(input6, input7, input8)
-
       const { spawn } = require('child_process');
       const childPython = spawn('python', ['coolprop.py', cycleProperties, fluid, input1, value1, input2, value2, input3, value3]);
     
@@ -112,8 +108,8 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.stdout.on('data', (data) => {
         let output = data.toString();
         let outputArray = output.split(" ")
-        console.log(outputArray);
-        console.log(`stdout: ${outputArray[0]}`);
+        //console.log(outputArray);
+        //console.log(`stdout: ${outputArray[0]}`);
         let h1 = parseFloat(outputArray[2]);
         let specificVolume1 = parseFloat(1/outputArray[1]);
         let wb = specificVolume1*(outputArray[4]-outputArray[0]);
@@ -134,23 +130,23 @@ Router.post('/RankineCycle', (req, res) => {
       
         propListFinal = [
           {property: 'Entalpia do estado 1 (h1)', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 1 (s1)', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Volume específico do fluído no estado 1', value: specificVolume1.toFixed(6), unit: 'm3/kg'},
+          //{property: 'Entropia do estado 1 (s1)', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Volume específico do fluido no estado 1', value: specificVolume1.toFixed(6), unit: 'm³/kg'},
           {property: 'Entalpia do estado 2 (h2)', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 3 (h3)', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 4 (h4)', value: (h4/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 4 (s4)', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Entropia do estado 4 (s4)', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Título do estado 4 (x4)', value: x4.toFixed(4), unit: ''},
-          {property: 'Vazão mássica do fluído de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão mássica do fluido de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'Potência entregue pela bomba', value: (wbpotencia/1000).toFixed(4), unit: 'kW'},
           {property: 'Taxa de calor que entra na caldeira', value: (qe/1000).toFixed(4), unit: 'kW'},
           {property: 'Taxa de calor que sai no condensador', value: (qs/1000).toFixed(4), unit: 'kW'},
           {property: 'Potência líquida do ciclo', value: (wLiq/1000).toFixed(4), unit: 'kW'},
           {property: 'Eficiência térmica do ciclo', value: rendimento.toFixed(4), unit: '%'},
-          {property: 'Vazão mássica do fluído de resfriamento', value: (ma).toFixed(4), unit: 'kg/s'},
-          {property: 'Temperatura de saída do fluído de resfriamento', value: (ts).toFixed(4), unit: 'Celsius'},
+          {property: 'Vazão mássica do fluido de resfriamento', value: (ma).toFixed(4), unit: 'kg/s'},
+          {property: 'Temperatura de saída do fluido de resfriamento', value: (ts).toFixed(4), unit: '°C'},
         ]
-        if (propListFinal.length == 16 ) {
+        if (propListFinal.length == 13) {
           return res.status(200).json(propListFinal);
         }  
       });
@@ -177,8 +173,8 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.stdout.on('data', (data) => {
         let output = data.toString();
         let outputArray = output.split(" ")
-        console.log(outputArray);
-        console.log(`stdoutRSI2: ${outputArray[0]}`);
+        //console.log(outputArray);
+        //console.log(`stdoutRSI2: ${outputArray[0]}`);
         let h1 = parseFloat(outputArray[1]);
         let specificVolume1 = parseFloat(1/outputArray[0]);
         let wb = specificVolume1*(value1-value3);
@@ -198,21 +194,21 @@ Router.post('/RankineCycle', (req, res) => {
       
         propListFinal = [
           {property: 'Entalpia do estado 1 (h1)', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 1 (s1)', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Volume Específico (estado 1)', value: specificVolume1.toFixed(6), unit: 'm3/kg'},
+          //{property: 'Entropia do estado 1 (s1)', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Volume Específico (estado 1)', value: specificVolume1.toFixed(6), unit: 'm³/kg'},
           {property: 'Entalpia do estado 2 (h2)', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 3 (h3)', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 4 (h4)', value: (h4/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 4 (s4)', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Entropia do estado 4 (s4)', value: (s4/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Título do estado 4 (x4)', value: x4.toFixed(4), unit: ''},
-          {property: 'Vazão mássica do fluído de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão mássica do fluido de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'Potência produzida pela turbina', value: (wt/1000).toFixed(4), unit: 'kW'},
           {property: 'Potência entregue pela bomba', value: (wbpotencia/1000).toFixed(4), unit: 'kW'},
           {property: 'Taxa de calor que entra na caldeira', value: (qe/1000).toFixed(4), unit: 'kW'},
           {property: 'Taxa de calor que sai no condensador', value: (qs/1000).toFixed(4), unit: 'kW'},
           {property: 'Eficiência térmica do ciclo', value: rendimento.toFixed(4), unit: '%'},
         ]
-        if (propListFinal.length == 14 ) {
+        if (propListFinal.length == 11 ) {
           return res.status(200).json(propListFinal);
         }  
       });
@@ -246,7 +242,7 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.stdout.on('data', (data) => {
         let output = data.toString();
         let outputArray = output.split(" ")
-        console.log(outputArray);
+        //console.log(outputArray);
 
         let p1 = parseFloat(outputArray[0]);
         let specificVolume1 = parseFloat(1/outputArray[1]);
@@ -294,16 +290,16 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'Entalpia do estado 1 (h1)', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 2 (h2)', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 3 (h3)', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 3 (s3)', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Entropia do estado 3 (s3)', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Entalpia do estado 4 (h4)', value: (h4/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 5 (h5)', value: (h5/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 5 (s5)', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Entropia do estado 5 (s5)', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Entalpia do estado 6 (h6)', value: (h6/1000).toFixed(4), unit: 'kJ/kg'},
           //{property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
           //{property: 'sv1', value: (sv1/1000).toFixed(4), unit: 'kJ/kgK'},
           //{property: 'sl4', value: (sl4/1000).toFixed(4), unit: 'kJ/kgK'},
           //{property: 'sv4', value: (sv4/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Vazão mássica do fluído de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão mássica do fluido de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'Potência produzida pela primeira turbina', value: (wb1/1000).toFixed(4), unit: 'kW'},
           {property: 'Potência produzida pelo ciclo', value: (wsai/1000).toFixed(4), unit: 'kW'},
           {property: 'Potência entregue pela bomba', value: (WB/1000).toFixed(4), unit: 'kW'},
@@ -314,7 +310,7 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'Potência líquida do ciclo', value: (wLiq/1000).toFixed(4), unit: 'kW'},
           {property: 'Eficiência térmica do ciclo', value: ηt.toFixed(4), unit: '%'},
         ]
-        if (propListFinal.length == 18 ) {
+        if (propListFinal.length == 16 ) {
           return res.status(200).json(propListFinal);
         }  
       });
@@ -349,7 +345,7 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.stdout.on('data', (data) => {
         let output = data.toString();
         let outputArray = output.split(" ")
-        console.log(outputArray);
+        //console.log(outputArray);
 
         let p1 = parseFloat(outputArray[0]);
         let specificVolume1 = parseFloat(1/outputArray[1]);
@@ -397,16 +393,16 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'Entalpia do estado 1 (h1)', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 2 (h2)', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 3 (h3)', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 3 (s3)', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Entropia do estado 3 (s3)', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Entalpia do estado 4 (h4)', value: (h4/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 5 (h5)', value: (h5/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entropia do estado 5 (s5)', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'Entropia do estado 5 (s5)', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Entalpia do estado 6 (h6)', value: (h6/1000).toFixed(4), unit: 'kJ/kg'},
           //{property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
           //{property: 'sv1', value: (sv1/1000).toFixed(4), unit: 'kJ/kgK'},
           //{property: 'sl4', value: (sl4/1000).toFixed(4), unit: 'kJ/kgK'},
           //{property: 'sv4', value: (sv4/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Vazão mássica do fluído de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
+          {property: 'Vazão mássica do fluido de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
           {property: 'Potência produzida pela primeira turbina', value: (wb1/1000).toFixed(4), unit: 'kW'},
           {property: 'Potência produzida pela segunda turbina', value: (wb2/1000).toFixed(4), unit: 'kW'},
           {property: 'Potência produzida pelo ciclo', value: (wsai/1000).toFixed(4), unit: 'kW'},
@@ -417,7 +413,7 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'Taxa de calor rejeitado pelo ciclo', value: (qs/1000).toFixed(4), unit: 'kW'},
           {property: 'Eficiência térmica do ciclo', value: ηt.toFixed(4), unit: '%'},
         ]
-        if (propListFinal.length == 18 ) {
+        if (propListFinal.length == 16 ) {
           return res.status(200).json(propListFinal);
         }  
       });
@@ -470,7 +466,7 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.stdout.on('data', (data) => {
         let output = data.toString();
         let outputArray = output.split(" ")
-        console.log(outputArray);
+        //console.log(outputArray);
 
         let p1 = parseFloat(outputArray[0]);
         let specificVolume1 = parseFloat(1/outputArray[1]);
@@ -500,45 +496,52 @@ Router.post('/RankineCycle', (req, res) => {
         let h6s = parseFloat(outputArray[15]); 
         let h6r = parseFloat(outputArray[17]);
         let t6r = parseFloat(outputArray[18])-273.15;
-        console.log(t6r)
+        //console.log(t6r)
         let massFlowRate = value6 / ((h3-h4r) + (h5 - h6r) - (h2-h1));
         let ηt1 = (h3 - h4r)/(h3 - h4s);
         let qs = massFlowRate * (h6r - h1);
         let qe = massFlowRate * (h3-h2);
         let qr = massFlowRate * (h5-h4r);
         let qt = qe + qr;
+        let wb1 = massFlowRate * (h3 - h4r);
+        let wb2 = massFlowRate * (h5 - h6r);
+        let wsai = wb1 + wb2;
+        let WB = massFlowRate * wb;
         let ηt = value6 / qt;
-        ma = (value12)*value10;
-        ts = ((qs/1000)/(ma*4.18)) + (value11-273.15);
+        let ma = (value12)*value10;
+        let ts = ((qs/1000)/(ma*4.18)) + (value11-273.15);
         
         propListFinal = [
           {property: 'Entalpia do estado 1 (h1)', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 2 (h2)', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 3 (h3)', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entalpia do estado h4s (h4s)', value: (h4s/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entalpia do estado h4r (h4r)', value: (h4r/1000).toFixed(4), unit: 'kJ/kg'},
+          //{property: 'Entropia do estado 3 (s3)', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
+          {property: 'Entalpia do estado 4s (h4s)', value: (h4s/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'Entalpia do estado 4r (h4r)', value: (h4r/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 5 (h5)', value: (h5/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entalpia do estado h6s (h6s)', value: (h6s/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'Entalpia do estado h6r (h6r)', value: (h6r/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'sv1', value: (sv1/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 's3', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'sl4', value: (sl4s/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'sv4', value: (sv4s/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 's5', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'Vazão Mássica', value: massFlowRate.toFixed(4), unit: 'kg/s'},
-          {property: 'ηt1', value: (ηt1*100).toFixed(4), unit: '%'},
-          {property: 'ηt', value: (ηt*100).toFixed(4), unit: '%'},
-          {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
-          {property: 'qr', value: (qr/1000).toFixed(4), unit: 'kW'},
-          {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
-          {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
-          {property: 'ma', value: (ma).toFixed(4), unit: 'kg/s'},
-          {property: 'ts', value: (ts).toFixed(4), unit: 'Celsius'},
-          {property: 't6r', value: (t6r).toFixed(4), unit: 'Celsius'},
-
+          //{property: 'Entropia do estado 5 (s5)', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
+          {property: 'Entalpia do estado 6s (h6s)', value: (h6s/1000).toFixed(4), unit: 'kJ/kg'},
+          {property: 'Entalpia do estado 6r (h6r)', value: (h6r/1000).toFixed(4), unit: 'kJ/kg'},
+          //{property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'sv1', value: (sv1/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'sl4', value: (sl4s/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'sv4', value: (sv4s/1000).toFixed(4), unit: 'kJ/kgK'},
+          {property: 'Vazão mássica do fluido de trabalho', value: massFlowRate.toFixed(4), unit: 'kg/s'},
+          {property: 'Potência produzida pela primeira turbina', value: (wb1/1000).toFixed(4), unit: 'kW'},
+          {property: 'Rendimento da primeira turbina', value: (ηt1*100).toFixed(4), unit: '%'},
+          {property: 'Potência produzida pela segunda turbina', value: (wb2/1000).toFixed(4), unit: 'kW'},
+          {property: 'Potência produzida pelo ciclo', value: (wsai/1000).toFixed(4), unit: 'kW'},
+          {property: 'Potência entregue pela bomba', value: (WB/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor que entra na caldeira', value: (qe/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor de reaquecimento', value: (qr/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor total fornecido para o ciclo', value: (qt/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor rejeitado pelo ciclo', value: (qs/1000).toFixed(4), unit: 'kW'},
+          {property: 'Eficiência térmica do ciclo', value: (ηt*100).toFixed(4), unit: '%'},
+          {property: 'Vazão mássica do fluido de resfriamento', value: (ma).toFixed(4), unit: 'kg/s'},
+          {property: 'Temperatura de saída do fluido de resfriamento', value: (ts).toFixed(4), unit: '°C'},
+          {property: 'Temperatura do vapor na saída do segundo estágio da turbina', value: (t6r).toFixed(4), unit: '°C'}
         ]
-        if (propListFinal.length == 24 ) {
+        if (propListFinal.length == 22) {
           return res.status(200).json(propListFinal);
         }  
       });
@@ -579,7 +582,7 @@ Router.post('/RankineCycle', (req, res) => {
       childPython.stdout.on('data', (data) => {
         let output = data.toString();
         let outputArray = output.split(" ")
-        console.log(outputArray);
+        //console.log(outputArray);
 
         let wt2 = parseFloat(value6);
         let massFlowRate = parseFloat(value8);
@@ -609,11 +612,13 @@ Router.post('/RankineCycle', (req, res) => {
         let h5 = parseFloat(outputArray[13]);
         let s5 = parseFloat(outputArray[14]);
         let h6s = parseFloat(outputArray[15]); 
-        console.log(wt2)
+        //console.log(wt2)
         let h6r = h5-(wt2/massFlowRate);
         let ηt1 = (h3 - h4r)/(h3 - h4s);
         let ηt2 = (h5 - h6r)/(h5 - h6s);
         let wt1 = massFlowRate*(h3-h4r);
+        let wsai = wt1 + wt2;
+        let WB = massFlowRate * wb;
         let qs = massFlowRate * (h6r - h1);
         let qe = massFlowRate * (h3-h2);
         let qr = massFlowRate * (h5-h4r);
@@ -625,28 +630,30 @@ Router.post('/RankineCycle', (req, res) => {
           {property: 'Entalpia do estado 1 (h1)', value: (h1/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 2 (h2)', value: (h2/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 3 (h3)', value: (h3/1000).toFixed(4), unit: 'kJ/kg'},
+          //{property: 'Entropia do estado 3 (s3)', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Entalpia do estado 4s (h4s)', value: (h4s/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 4r (h4r)', value: (h4r/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 5 (h5)', value: (h5/1000).toFixed(4), unit: 'kJ/kg'},
+          //{property: 'Entropia do estado 5 (s5)', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
           {property: 'Entalpia do estado 6s (h6s)', value: (h6s/1000).toFixed(4), unit: 'kJ/kg'},
           {property: 'Entalpia do estado 6r (h6r)', value: (h6r/1000).toFixed(4), unit: 'kJ/kg'},
-          {property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'sv1', value: (sv1/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 's3', value: (s3/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'sl4', value: (sl4s/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'sv4', value: (sv4s/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 's5', value: (s5/1000).toFixed(4), unit: 'kJ/kgK'},
-          {property: 'ηt1', value: (ηt1*100).toFixed(4), unit: '%'},
-          {property: 'ηt2', value: (ηt2*100).toFixed(4), unit: '%'},
-          {property: 'ηt', value: (ηt*100).toFixed(4), unit: '%'},
-          {property: 'wt1', value: (wt1/1000).toFixed(4), unit: 'kW'},
-          {property: 'wliq', value: (wliq/1000).toFixed(4), unit: 'kW'},
-          {property: 'qe', value: (qe/1000).toFixed(4), unit: 'kW'},
-          {property: 'qr', value: (qr/1000).toFixed(4), unit: 'kW'},
-          {property: 'qt', value: (qt/1000).toFixed(4), unit: 'kW'},
-          {property: 'qs', value: (qs/1000).toFixed(4), unit: 'kW'},
+          //{property: 'sl1', value: (sl1/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'sv1', value: (sv1/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'sl4', value: (sl4s/1000).toFixed(4), unit: 'kJ/kgK'},
+          //{property: 'sv4', value: (sv4s/1000).toFixed(4), unit: 'kJ/kgK'},
+          {property: 'Potência produzida pela primeira turbina', value: (wt1/1000).toFixed(4), unit: 'kW'},
+          {property: 'Rendimento da primeira turbina', value: (ηt1*100).toFixed(4), unit: '%'},
+          {property: 'Rendimento da segunda turbina', value: (ηt2*100).toFixed(4), unit: '%'},
+          {property: 'Potência produzida pelo ciclo', value: (wsai/1000).toFixed(4), unit: 'kW'},
+          {property: 'Potência entregue pela bomba', value: (WB/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor que entra na caldeira', value: (qe/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor de reaquecimento', value: (qr/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor total fornecido para o ciclo', value: (qt/1000).toFixed(4), unit: 'kW'},
+          {property: 'Taxa de calor rejeitado pelo ciclo', value: (qs/1000).toFixed(4), unit: 'kW'},
+          {property: 'Potência líquida do ciclo', value: (wliq/1000).toFixed(4), unit: 'kW'},
+          {property: 'Eficiência térmica do ciclo', value: (ηt*100).toFixed(4), unit: '%'},
         ]
-        if (propListFinal.length == 23 ) {
+        if (propListFinal.length == 19) {
           return res.status(200).json(propListFinal);
         }  
       });
