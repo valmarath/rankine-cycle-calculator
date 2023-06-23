@@ -25,4 +25,7 @@ server.use(bodyParser.json()); */
 
 
 server.use("/", Urlpth);
+/* server.listen(process.env.PORT || 8080);
+console.log(`Server (${server}) is running on port ${process.env.PORT}`); */
+
 server.listen(port, () => console.log(`Server has started on port: ${port}`));

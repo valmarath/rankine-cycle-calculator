@@ -180,7 +180,6 @@ Router.post('/RankineCycle', (req, res) => {
         let wb = specificVolume1*(value1-value3);
         let h2 = parseFloat(outputArray[1]) + parseFloat(wb);
         let h3 = parseFloat(outputArray[4]);
-        let sl1 = parseFloat(outputArray[2]);
         let s4 = parseFloat(outputArray[5]);
         let x4 = (s4 - outputArray[2])/ (outputArray[7] - outputArray[2]);
         let h4 = h1 + (x4*(outputArray[6] - outputArray[1]));
