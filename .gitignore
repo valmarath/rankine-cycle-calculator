@@ -3,4 +3,7 @@ client/fly.toml
 server/node_modules
 server/fly.toml
 server/Dockerfile
-ajustes.txt
+server/.dockerignore
+server/.vscode -r
+server/.vscode/launch.json
+server/.vscode/tasks.json
