@@ -20,7 +20,7 @@
 
 <h4> Prerequisites</h4>
 
-- Node >= 0.6 e npm >= 5.6 
+- Node >= 16.17.0 e npm >= 5.6 
 - Package manager - NPM or YARN
 - Python >= 3.10.6
 
